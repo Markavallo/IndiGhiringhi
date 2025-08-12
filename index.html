@@ -98,7 +98,6 @@
     text-align: right;
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-family: monospace;
   }
 </style>
 </head>
@@ -119,7 +118,7 @@
   <div class="in-footer">
     <div class="in-text">
       <div id="in-date"></div>
-      <div id="in-code">अंतरिक्ष कमांड</div>
+      <div style="font-size:0.8em; margin-top:2px;">टीम इंडिया</div>
     </div>
     <img src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg" alt="Indian Flag">
   </div>
@@ -136,7 +135,7 @@ const targets = [
 const ACQUIRE_RANGE = 20; // metri
 
 // === STATO ===
-let collected = JSON.parse(localStorage.getItem("collectedDataIN") || "[]");
+let collected = JSON.parse(localStorage.getItem("collectedData") || "[]");
 if (collected.length === 0) collected = targets.map(() => null);
 
 let currentPosition = null;
@@ -212,7 +211,7 @@ function acquireData() {
     return;
   }
   collected[nextIndex] = targets[nextIndex].desc;
-  localStorage.setItem("collectedDataIN", JSON.stringify(collected));
+  localStorage.setItem("collectedData", JSON.stringify(collected));
   document.getElementById("status").textContent = `${targets[nextIndex].name} acquisito!`;
   updateCoordsUI();
 }
@@ -238,7 +237,7 @@ function getPosition() {
 
 function resetGame() {
   if (confirm("Sei sicuro di voler resettare il gioco?")) {
-    localStorage.removeItem("collectedDataIN");
+    localStorage.removeItem("collectedData");
     collected = targets.map(() => null);
     updateCoordsUI();
     document.getElementById("status").textContent = "Gioco resettato.";
@@ -258,4 +257,7 @@ updateCoordsUI();
 
 const now = new Date();
 document.getElementById("in-date").textContent =
-  now.toLocaleDateString("hi-IN", { year: 'numeric', month
+  now.toLocaleDateString("en-US", { month: '2-digit', day: '2-digit', year: 'numeric' });
+</script>
+</body>
+</html>
